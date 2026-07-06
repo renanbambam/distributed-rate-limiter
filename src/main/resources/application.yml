@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: distributed-rate-limiter
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+
+server:
+  port: 8080
+
+rate-limiter:
+  algorithm: ${RATE_LIMITER_ALGORITHM:token-bucket}
+  limit: ${RATE_LIMITER_LIMIT:10}
+  window-seconds: ${RATE_LIMITER_WINDOW_SECONDS:60}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,metrics
+  endpoint:
+    health:
+      show-details: never
